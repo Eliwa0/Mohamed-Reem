@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Mohamed & Reem Wedding Invitation</title>
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700&family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+    <!-- SwiperJS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Poppins', 'Tajawal', sans-serif;
+            background: #FCF9F5;
+            color: #2C2A29;
+            scroll-behavior: smooth;
+        }
+        body.arabic {
+            font-family: 'Tajawal', 'Poppins', sans-serif;
+            direction: rtl;
+        }
+        .music-btn {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            z-index: 1000;
+            background: #C1A98B;
+            color: white;
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+            transition: 0.2s;
+            border: none;
+            font-size: 1.4rem;
+        }
+        .music-btn:hover { background: #A6896A; transform: scale(1.05); }
+        body.arabic .music-btn { right: auto; left: 25px; }
+        .lang-switch {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: #C1A98B;
+            color: white;
+            border: none;
+            padding: 8px 18px;
+            border-radius: 40px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.85rem;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            transition: 0.2s;
+            font-family: inherit;
+        }
+        .lang-switch:hover { background: #A6896A; }
+        body.arabic .lang-switch { right: auto; left: 20px; }
+        .nav-menu {
+            position: sticky;
+            top: 20px;
+            z-index: 99;
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            flex-wrap: wrap;
+            background: rgba(255, 250, 240, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 12px 20px;
+            border-radius: 60px;
+            width: fit-content;
+            margin: 15px auto 0;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+            border: 1px solid #F0E4D4;
+        }
+        .nav-menu a {
+            text-decoration: none;
+            color: #7E6952;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: 0.2s;
+            padding: 5px 12px;
+            border-radius: 30px;
+            cursor: pointer;
+        }
+        .nav-menu a:hover { background: #F3EDE4; color: #A6896A; }
+        .countdown-bar {
+            background: #EADDCB;
+            color: #5A4A38;
+            text-align: center;
+            padding: 12px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .countdown-bar span {
+            font-weight: 700;
+            margin: 0 3px;
+            background: white;
+            padding: 3px 10px;
+            border-radius: 30px;
+            color: #8E765C;
+        }
+        .hero {
+            text-align: center;
+            padding: 60px 20px 80px;
+            background: linear-gradient(145deg, #FCF9F5 0%, #F7F0E7 100%);
+        }
+        .hero h1 { font-family: 'Playfair Display', serif; font-size: 2rem; letter-spacing: 3px; color: #B29A7A; font-weight: 500; }
+        .hero .names { font-family: 'Playfair Display', serif; font-size: 4rem; font-weight: 800; color: #5E4B34; margin: 15px 0; letter-spacing: 2px; }
+        .hero .date-badge { background: white; display: inline-block; padding: 8px 28px; border-radius: 50px; font-size: 1rem; box-shadow: 0 5px 15px rgba(0,0,0,0.03); margin-top: 20px; color: #9E8366; border: 1px solid #F0E0CF; }
+        .container { max-width: 1100px; margin: auto; padding: 20px 20px 60px; }
+        .card {
+            background: white;
+            border-radius: 32px;
+            padding: 40px 35px;
+            margin-bottom: 55px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.02);
+            border: 1px solid #F0E4D4;
+            transition: 0.2s;
+        }
+        .card-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.9rem;
+            text-align: center;
+            margin-bottom: 30px;
+            color: #7E6952;
+            letter-spacing: -0.5px;
+        }
+        body.arabic .card-title { font-family: 'Tajawal'; font-weight: 700; }
+        .story-timeline {
+            display: flex;
+            flex-direction: column;
+            gap: 35px;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        .story-item {
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+            border-bottom: 1px dashed #EADDCB;
+            padding-bottom: 25px;
+        }
+        .story-icon { font-size: 2rem; color: #C1A98B; min-width: 60px; text-align: center; }
+        .story-text h4 { font-size: 1.4rem; font-weight: 700; color: #5E4B34; margin-bottom: 5px; }
+        .story-text p { color: #8F7A64; line-height: 1.5; font-size: 0.95rem; }
+        body.arabic .story-text { text-align: right; }
+        .schedule-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 25px;
+            margin-top: 15px;
+        }
+        .schedule-item {
+            background: #FCF8F2;
+            padding: 20px 15px;
+            border-radius: 48px;
+            width: 200px;
+            text-align: center;
+            transition: 0.2s;
+            border: 1px solid #F0E4D4;
+        }
+        .schedule-item i { font-size: 2rem; color: #C1A98B; margin-bottom: 12px; display: block; }
+        .schedule-item .time { font-weight: 800; color: #5E4B34; margin-bottom: 5px; font-size: 1.1rem; }
+        .schedule-item .event { font-size: 0.9rem; color: #8F7A64; }
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 25px;
+            margin-top: 20px;
+        }
+        .info-card {
+            background: #FDF9F4;
+            border-radius: 28px;
+            padding: 25px 15px;
+            text-align: center;
+            border: 1px solid #F0E4D4;
+        }
+        .info-card i { font-size: 2rem; color: #C1A98B; margin-bottom: 15px; display: block; }
+        .info-card h4 { font-size: 1.2rem; font-weight: 700; color: #5E4B34; margin-bottom: 10px; }
+        .info-card p { font-size: 0.85rem; color: #8F7A64; line-height: 1.4; }
+        .map-container { border-radius: 32px; overflow: hidden; margin: 20px 0; border: 1px solid #F0E4D4; }
+        iframe { width: 100%; height: 300px; border: 0; }
+        .btn-location { background: #C1A98B; color: white; padding: 10px 22px; border-radius: 40px; border: none; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; font-weight: 500; margin-top: 10px; text-decoration: none; }
+        .btn-location:hover { background: #A6896A; }
+        .rsvp-box { background: #FDF9F4; border-radius: 32px; padding: 30px; text-align: center; }
+        .choice-group { display: flex; justify-content: center; gap: 30px; margin: 25px 0; flex-wrap: wrap; }
+        .choice-group label { font-weight: 600; display: flex; align-items: center; gap: 10px; background: white; padding: 10px 25px; border-radius: 50px; border: 1px solid #EADDCB; cursor: pointer; }
+        .choice-group input { width: 18px; height: 18px; cursor: pointer; }
+        .rsvp-box input[type="text"] { width: 100%; padding: 12px 20px; border-radius: 50px; border: 1px solid #EADDCB; background: white; margin-bottom: 20px; font-family: inherit; }
+        button[type="submit"] { background: #C1A98B; color: white; border: none; padding: 12px 30px; border-radius: 50px; font-weight: bold; cursor: pointer; transition: 0.2s; }
+        button[type="submit"]:hover { background: #A6896A; }
+        .rsvp-message { margin-top: 20px; font-weight: 500; }
+        .swiper { padding-bottom: 40px; }
+        .swiper-slide img { border-radius: 24px; height: 280px; object-fit: cover; width: 100%; }
+        .swiper-pagination-bullet-active { background: #C1A98B !important; }
+        .swiper-button-next, .swiper-button-prev { color: #C1A98B !important; }
+        footer { background: #EDE3D8; color: #5E4B34; text-align: center; padding: 35px 20px; margin-top: 30px; border-radius: 40px 40px 0 0; }
+        @media (max-width: 700px) {
+            .hero .names { font-size: 2.5rem; }
+            .card { padding: 30px 20px; }
+            .schedule-item { width: 160px; }
+            .info-grid { grid-template-columns: 1fr 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <button class="music-btn" id="musicToggleBtn"><i class="fas fa-music"></i></button>
+    <button class="lang-switch" id="langToggle">العربية</button>
+    
+    <div class="countdown-bar" id="countdownText">
+        Counting the days to our forever — <span id="days">00</span>d <span id="hours">00</span>h <span id="mins">00</span>m <span id="secs">00</span>s
+    </div>
+    
+    <div class="nav-menu">
+        <a id="navHome">Home</a>
+        <a id="navStory">Our Story</a>
+        <a id="navSchedule">Schedule</a>
+        <a id="navInfo">Info</a>
+        <a id="navRsvp">RSVP</a>
+    </div>
+    
+    <section id="home" class="hero">
+        <h1 id="heroSub">Together with their families</h1>
+        <div class="names">Mohamed<br>& Reem</div>
+        <div class="date-badge" id="heroDate">August 8, 2026</div>
+    </section>
+    
+    <div class="container">
+        <!-- Our Story Section -->
+        <div class="card" id="story">
+            <div class="card-title" id="storyTitle">The Story</div>
+            <div class="story-timeline">
+                <div class="story-item">
+                    <div class="story-icon"><i class="fas fa-coffee"></i></div>
+                    <div class="story-text">
+                        <h4 id="story1Title">First Meeting</h4>
+                        <p id="story1Desc">May 21, 2025 — في كافيه، قهوة تحولت إلى ساعات من الضحك، وعرفنا أن شيئاً جميلاً قد بدأ.</p>
+                    </div>
+                </div>
+                <div class="story-item">
+                    <div class="story-icon"><i class="fas fa-ring"></i></div>
+                    <div class="story-text">
+                        <h4 id="story2Title">The Engagement</h4>
+                        <p id="story2Desc">July 12, 2025 — بين أحبائنا، قلنا 'نعم' لحياة معاً.</p>
+                    </div>
+                </div>
+                <div class="story-item">
+                    <div class="story-icon"><i class="fas fa-heart"></i></div>
+                    <div class="story-text">
+                        <h4 id="story3Title">Katb El-Ketab</h4>
+                        <p id="story3Desc">May 21, 2026 — بداية مغامرتنا الكبرى، ولا نطيق الانتظار لمشاركتها معكم.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Location -->
+        <div class="card">
+            <div class="card-title" id="locationTitle">📍 Wedding Venue</div>
+            <div class="map-container">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d13695.443216087943!2d30.412969!3d31.376042!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14f5f5a5a5a5a5a5%3A0x0!2zMzHCsDIyJzMzLjgiTiAzMMKwMjQnNDYuNyJF!5e0!3m2!1sar!2seg!4v1700000000000!5m2!1sar!2seg" allowfullscreen loading="lazy"></iframe>
+            </div>
+            <div style="text-align: center;">
+                <button class="btn-location" id="openMapBtn"><i class="fas fa-map-pin"></i> <span id="mapBtnText">Get Directions ↗</span></button>
+            </div>
+            <div style="text-align: center; margin-top: 15px; color: #8F7A64;">
+                <i class="fas fa-location-dot"></i> <span id="locationAddress">طريق رشيد - ديبي - على النيل</span>
+            </div>
+        </div>
+        
+        <!-- Schedule - Wedding Party Only -->
+        <div class="card" id="schedule">
+            <div class="card-title" id="scheduleTitle">Wedding Party</div>
+            <div class="schedule-grid">
+                <div class="schedule-item">
+                    <i class="fas fa-glass-cheers"></i>
+                    <div class="time" id="weddingTime">6:00 PM</div>
+                    <div class="event" id="weddingDate">August 8, 2026</div>
+                    <div class="event" id="weddingPlace">Deby on the Nile</div>
+                    <div class="event" id="weddingAddress">طريق رشيد - ديبي - على النيل</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Good to Know (No Parking) -->
+        <div class="card" id="info">
+            <div class="card-title" id="infoTitle">Good to Know</div>
+            <div class="info-grid">
+                <div class="info-card"><i class="fas fa-child"></i><h4 id="info1Title">Children</h4><p id="info1Desc">We love your little ones! Children are warmly welcome. Please note their attendance in your RSVP.</p></div>
+                <div class="info-card"><i class="fas fa-tshirt"></i><h4 id="info2Title">Dress Code</h4><p id="info2Desc">The dress code is Black Tie. Ladies formal gowns, gentlemen tuxedo or dark formal suit. Avoid white or ivory.</p></div>
+                <div class="info-card"><i class="fas fa-camera"></i><h4 id="info3Title">Unplugged</h4><p id="info3Desc">We kindly ask for an unplugged ceremony — please keep phones away during the vows.</p></div>
+            </div>
+        </div>
+        
+        <!-- Moments Slider -->
+        <div class="card">
+            <div class="card-title" id="memoryTitle">Moments</div>
+            <div class="swiper mySwiper">
+                <div class="swiper-wrapper" id="swiperWrapper"></div>
+                <div class="swiper-pagination"></div>
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+            </div>
+        </div>
+        
+        <!-- RSVP -->
+        <div class="card" id="rsvp">
+            <div class="card-title" id="rsvpCardTitle">RSVP</div>
+            <div class="rsvp-box">
+                <p id="rsvpNote">Please respond by August 1st, 2026</p>
+                <form id="rsvpForm">
+                    <input type="text" id="name" placeholder="Your full name" required>
+                    <div class="choice-group">
+                        <label><input type="radio" name="attending" value="yes" required> 🎉 <span id="rsvpYes">Accept with pleasure</span></label>
+                        <label><input type="radio" name="attending" value="no"> ❌ <span id="rsvpNo">Decline with regret</span></label>
+                    </div>
+                    <button type="submit"><i class="fas fa-check"></i> <span id="rsvpBtn">Send RSVP</span></button>
+                </form>
+                <div id="rsvpMessage" class="rsvp-message"></div>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <p id="footerText">Mohamed & Reem — August 8, 2026</p>
+        <p style="font-size:0.8rem;">♥ Thank you for celebrating with us ♥</p>
+    </footer>
+    
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script>
+        // موسيقى هادئة جداً
+        const audio = new Audio('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3');
+        audio.loop = true;
+        audio.volume = 0.2;
+        let isPlaying = false;
+        const musicBtn = document.getElementById('musicToggleBtn');
+        const musicIcon = musicBtn.querySelector('i');
+        musicBtn.addEventListener('click', () => {
+            if(isPlaying) { audio.pause(); musicIcon.className = 'fas fa-music'; musicIcon.style.opacity = '0.6'; }
+            else { audio.play().catch(e=>console.log(e)); musicIcon.className = 'fas fa-volume-up'; musicIcon.style.opacity = '1'; }
+            isPlaying = !isPlaying;
+        });
+        document.body.addEventListener('click', function initAudio() {
+            if(!isPlaying) { audio.play().catch(()=>{}); musicIcon.className = 'fas fa-volume-up'; isPlaying = true; }
+            document.body.removeEventListener('click', initAudio);
+        }, { once: true });
+        
+        // Countdown
+        function updateCountdown() {
+            const target = new Date(2026, 7, 8, 18, 0, 0).getTime();
+            const now = new Date().getTime();
+            const diff = target - now;
+            if(diff < 0) { 
+                document.getElementById('countdownText').innerHTML = currentLang === 'en' ? "✨ The wedding has begun! ✨" : "✨ بدأ الفرح! ✨"; 
+                return; 
+            }
+            const days = Math.floor(diff / (1000*60*60*24));
+            const hours = Math.floor((diff % (86400000)) / 3600000);
+            const mins = Math.floor((diff % 3600000) / 60000);
+            const secs = Math.floor((diff % 60000) / 1000);
+            document.getElementById('days').innerText = days;
+            document.getElementById('hours').innerText = hours;
+            document.getElementById('mins').innerText = mins;
+            document.getElementById('secs').innerText = secs;
+        }
+        
+        // Load images from local folder image/img1.jpeg to img14.jpeg
+        const swiperWrapper = document.getElementById('swiperWrapper');
+        for(let i = 1; i <= 14; i++) {
+            const slide = document.createElement('div');
+            slide.className = 'swiper-slide';
+            const img = document.createElement('img');
+            img.src = `image/img${i}.jpeg`;
+            img.alt = `Memory ${i}`;
+            img.onerror = function() {
+                this.src = `image/img${i}.jpg`;
+            };
+            slide.appendChild(img);
+            swiperWrapper.appendChild(slide);
+        }
+        
+        new Swiper(".mySwiper", {
+            slidesPerView: 1, spaceBetween: 20, loop: true, autoplay: { delay: 2500, disableOnInteraction: false },
+            pagination: { el: ".swiper-pagination", clickable: true },
+            navigation: { nextEl: ".swiper-button-next", prevEl: ".swiper-button-prev" },
+            breakpoints: { 640: { slidesPerView: 2 }, 900: { slidesPerView: 3 } }
+        });
+        
+        // Language Data
+        const langData = {
+            en: {
+                navHome: "Home", navStory: "Our Story", navSchedule: "Schedule", navInfo: "Info", navRsvp: "RSVP",
+                heroSub: "Together with their families", heroDate: "August 8, 2026",
+                storyTitle: "The Story",
+                story1Title: "First Meeting", story1Desc: "May 21, 2025 — At a café, coffee turned into hours of laughter, and we knew something beautiful had begun.",
+                story2Title: "The Engagement", story2Desc: "July 12, 2025 — Surrounded by our dearest ones, we said 'yes' to a lifetime together.",
+                story3Title: "Katb El-Ketab", story3Desc: "May 21, 2026 — The beginning of our greatest adventure, and we can't wait to share it with you.",
+                locationTitle: "📍 Wedding Venue",
+                mapBtnText: "Get Directions ↗",
+                locationAddress: "Rashid Road - Deby - On the Nile",
+                scheduleTitle: "Wedding Party",
+                weddingTime: "6:00 PM", weddingDate: "August 8, 2026", weddingPlace: "Deby on the Nile", weddingAddress: "Rashid Road - Deby - On the Nile",
+                infoTitle: "Good to Know",
+                info1Title: "Children", info1Desc: "We love your little ones! Children are warmly welcome. Please note their attendance in your RSVP.",
+                info2Title: "Dress Code", info2Desc: "The dress code is Black Tie. Ladies formal gowns, gentlemen tuxedo or dark formal suit. Avoid white or ivory.",
+                info3Title: "Unplugged", info3Desc: "We kindly ask for an unplugged ceremony — please keep phones away during the vows.",
+                memoryTitle: "Moments",
+                rsvpCardTitle: "RSVP", rsvpNote: "Please respond by August 1st, 2026", rsvpYes: "Accept with pleasure", rsvpNo: "Decline with regret", rsvpBtn: "Send RSVP",
+                footerText: "Mohamed & Reem — August 8, 2026"
+            },
+            ar: {
+                navHome: "الرئيسية", navStory: "قصتنا", navSchedule: "الجدول", navInfo: "معلومات", navRsvp: "تأكيد",
+                heroSub: "بمشاركة عائلتيهما", heroDate: "8 أغسطس 2026",
+                storyTitle: "قصتنا",
+                story1Title: "اللقاء الأول", story1Desc: "21 مايو 2025 — في كافيه، قهوة تحولت إلى ساعات من الضحك، وعرفنا أن شيئاً جميلاً قد بدأ.",
+                story2Title: "الخطوبة", story2Desc: "12 يوليو 2025 — بين أحبائنا، قلنا 'نعم' لحياة معاً.",
+                story3Title: "كتب الكتاب", story3Desc: "21 مايو 2026 — بداية مغامرتنا الكبرى، ولا نطيق الانتظار لمشاركتها معكم.",
+                locationTitle: "📍 مكان الزفاف",
+                mapBtnText: "اتجاهات ↗",
+                locationAddress: "طريق رشيد - ديبي - على النيل",
+                scheduleTitle: "حفل الزفاف",
+                weddingTime: "6:00 مساءً", weddingDate: "8 أغسطس 2026", weddingPlace: "ديبي على النيل", weddingAddress: "طريق رشيد - ديبي - على النيل",
+                infoTitle: "معلومات مهمة",
+                info1Title: "الأطفال", info1Desc: "نحن نحب أطفالكم! الأطفال مرحب بهم بحرارة. يرجى ذكر حضورهم في تأكيد الحضور.",
+                info2Title: "اللبس", info2Desc: "قواعد اللباس رسمية. السيدات: فساتين رسمية، السادة: توكسيدو أو بدلة رسمية داكنة. يرجى تجنب الأبيض أو العاجي.",
+                info3Title: "التصوير", info3Desc: "نطلب عدم استخدام الهواتف خلال المراسم — يرجى إبعاد الهواتف أثناء تبادل الوعود.",
+                memoryTitle: "لحظات",
+                rsvpCardTitle: "تأكيد الحضور", rsvpNote: "يرجى التأكيد بحلول 1 أغسطس 2026", rsvpYes: "سأحضر بكل سرور", rsvpNo: "لن أحضر مع الأسف", rsvpBtn: "إرسال التأكيد",
+                footerText: "محمد وريم — 8 أغسطس 2026"
+            }
+        };
+        
+        let currentLang = 'en';
+        function updateLanguage() {
+            const d = langData[currentLang];
+            document.getElementById('navHome').innerText = d.navHome;
+            document.getElementById('navStory').innerText = d.navStory;
+            document.getElementById('navSchedule').innerText = d.navSchedule;
+            document.getElementById('navInfo').innerText = d.navInfo;
+            document.getElementById('navRsvp').innerText = d.navRsvp;
+            document.getElementById('heroSub').innerText = d.heroSub;
+            document.getElementById('heroDate').innerText = d.heroDate;
+            document.getElementById('storyTitle').innerText = d.storyTitle;
+            document.getElementById('story1Title').innerText = d.story1Title;
+            document.getElementById('story1Desc').innerText = d.story1Desc;
+            document.getElementById('story2Title').innerText = d.story2Title;
+            document.getElementById('story2Desc').innerText = d.story2Desc;
+            document.getElementById('story3Title').innerText = d.story3Title;
+            document.getElementById('story3Desc').innerText = d.story3Desc;
+            document.getElementById('locationTitle').innerText = d.locationTitle;
+            document.getElementById('mapBtnText').innerText = d.mapBtnText;
+            document.getElementById('locationAddress').innerText = d.locationAddress;
+            document.getElementById('scheduleTitle').innerText = d.scheduleTitle;
+            document.getElementById('weddingTime').innerText = d.weddingTime;
+            document.getElementById('weddingDate').innerText = d.weddingDate;
+            document.getElementById('weddingPlace').innerText = d.weddingPlace;
+            document.getElementById('weddingAddress').innerText = d.weddingAddress;
+            document.getElementById('infoTitle').innerText = d.infoTitle;
+            document.getElementById('info1Title').innerText = d.info1Title;
+            document.getElementById('info1Desc').innerText = d.info1Desc;
+            document.getElementById('info2Title').innerText = d.info2Title;
+            document.getElementById('info2Desc').innerText = d.info2Desc;
+            document.getElementById('info3Title').innerText = d.info3Title;
+            document.getElementById('info3Desc').innerText = d.info3Desc;
+            document.getElementById('memoryTitle').innerText = d.memoryTitle;
+            document.getElementById('rsvpCardTitle').innerText = d.rsvpCardTitle;
+            document.getElementById('rsvpNote').innerText = d.rsvpNote;
+            document.getElementById('rsvpYes').innerText = d.rsvpYes;
+            document.getElementById('rsvpNo').innerText = d.rsvpNo;
+            document.getElementById('rsvpBtn').innerText = d.rsvpBtn;
+            document.getElementById('footerText').innerText = d.footerText;
+            
+            if(currentLang === 'ar') {
+                document.body.classList.add('arabic');
+                document.getElementById('langToggle').innerText = 'English';
+                document.getElementById('name').placeholder = 'الاسم الكامل';
+            } else {
+                document.body.classList.remove('arabic');
+                document.getElementById('langToggle').innerText = 'العربية';
+                document.getElementById('name').placeholder = 'Your full name';
+            }
+        }
+        
+        // Navigation
+        document.getElementById('navHome').addEventListener('click', () => document.getElementById('home').scrollIntoView({ behavior: 'smooth' }));
+        document.getElementById('navStory').addEventListener('click', () => document.getElementById('story').scrollIntoView({ behavior: 'smooth' }));
+        document.getElementById('navSchedule').addEventListener('click', () => document.getElementById('schedule').scrollIntoView({ behavior: 'smooth' }));
+        document.getElementById('navInfo').addEventListener('click', () => document.getElementById('info').scrollIntoView({ behavior: 'smooth' }));
+        document.getElementById('navRsvp').addEventListener('click', () => document.getElementById('rsvp').scrollIntoView({ behavior: 'smooth' }));
+        
+        document.getElementById('langToggle').addEventListener('click', () => {
+            currentLang = currentLang === 'en' ? 'ar' : 'en';
+            updateLanguage();
+        });
+        
+        // Map link
+        document.getElementById('openMapBtn').addEventListener('click', () => {
+            window.open('https://maps.app.goo.gl/FgGxffA9pjrwDL5u5', '_blank');
+        });
+        
+        // RSVP Form
+        const rsvpForm = document.getElementById('rsvpForm'), msgDiv = document.getElementById('rsvpMessage');
+        rsvpForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = document.getElementById('name').value.trim();
+            const attending = document.querySelector('input[name="attending"]:checked');
+            if(!name || !attending) {
+                msgDiv.innerHTML = currentLang === 'en' ? "⚠️ Please enter your name and choose an option." : "⚠️ من فضلك اكتب اسمك واختر خياراً.";
+                msgDiv.style.color = "#B05B3A";
+                return;
+            }
+            const isComing = attending.value === 'yes';
+            let reply = currentLang === 'en' ? `✨ Thank you ${name}! ✨<br>` : `✨ شكراً ${name}! ✨<br>`;
+            reply += isComing ? (currentLang === 'en' ? "Your RSVP has been received! We cannot wait to celebrate with you 💐" : "تم استلام تأكيد حضورك! لا نطيق الانتظار للاحتفال معكم 💐") : (currentLang === 'en' ? "We're sorry you can't make it. You'll be in our thoughts and prayers." : "نأسف لعدم تمكنكم من الحضور. ستكونون في أفكارنا ودعائنا.");
+            msgDiv.innerHTML = reply;
+            msgDiv.style.color = "#6F5B47";
+            rsvpForm.reset();
+            setTimeout(() => msgDiv.innerHTML = "", 5000);
+        });
+        
+        updateLanguage();
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+    </script>
+</body>
+</html>
