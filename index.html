@@ -384,7 +384,7 @@
             img.src = `img${i}.jpeg`;
             img.alt = `Memory ${i}`;
             img.onerror = function() {
-                this.src = `image/img${i}.jpg`;
+                this.src = `img${i}.jpg`;
             };
             slide.appendChild(img);
             swiperWrapper.appendChild(slide);
